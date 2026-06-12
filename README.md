@@ -80,7 +80,7 @@ fig.update_layout(
 )
 
 fig.show()
-...
+```
 
 The visualization reveals that delivery activity is predominantly concentrated in the southern and central regions of India, with fewer points in the northern and northeastern zones. This insight can inform strategic service expansion or resource allocation decisions.
 
@@ -133,7 +133,7 @@ fig.update_layout(
 )
 
 fig.show()
-...
+```
 
 ## 6. Outlier Removal and Zone Optimization
 Upon inspecting the clustered results, it was observed that one of the clusters (Cluster 1) contained geographical points outside the expected Indian boundaries, indicating potential data entry errors or GPS inaccuracies. This outlier cluster is removed, and the remaining valid clusters are relabeled with business-contextual names like "Central Delivery Zone" and "Southern Delivery Zone" to make them more actionable for logistics planning.
@@ -149,7 +149,7 @@ cluster_labels = {
 filtered_data['Optimized_Zone'] = filtered_data['Cluster'].map(cluster_labels)
 
 print(filtered_data['Optimized_Zone'].value_counts())
-...
+```
 
 ## 7. Conclusion
 This project successfully demonstrates how geospatial clustering can be used to segment delivery locations into meaningful zones. By identifying and removing outliers, and then assigning intuitive names to the clusters, the raw spatial data is transformed into actionable intelligence for improved logistics planning, such as optimizing delivery routes, allocating resources efficiently, and identifying strategic areas for business expansion. This approach provides a solid foundation for more advanced location-based decision-making.
