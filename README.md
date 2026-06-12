@@ -30,7 +30,7 @@ print(data.head())
 ## 3. Distance Calculation
 To understand the actual travel required for deliveries, the real-world distance (in kilometers) between each restaurant and its corresponding delivery location is calculated using the `geodesic` formula from the `geopy` library. This provides a more accurate measure than Euclidean distance, accounting for the curvature of the Earth.
 
-def calculate_distance(row):
+...def calculate_distance(row):
     return geodesic(
         (row['Restaurant_latitude'], row['Restaurant_longitude']),
         (row['Delivery_location_latitude'], row['Delivery_location_longitude'])
