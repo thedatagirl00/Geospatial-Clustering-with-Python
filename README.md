@@ -18,7 +18,7 @@ Geospatial clustering is a powerful unsupervised learning technique used to iden
 The dataset used for this project is sourced from Kaggle and contains detailed information about various delivery orders, including geographical coordinates for restaurants and delivery locations. Initial data loading and exploration are performed using the `pandas` library.
 
 
-import pandas as pd
+## import pandas as pd
 import numpy as np
 from sklearn.cluster import KMeans
 from geopy.distance import geodesic
