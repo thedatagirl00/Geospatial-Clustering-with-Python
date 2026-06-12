@@ -19,12 +19,16 @@ The dataset used for this project is sourced from Kaggle and contains detailed i
 
 
 ## import pandas as pd
+
+```python
 import numpy as np
 from sklearn.cluster import KMeans
 from geopy.distance import geodesic
 
 data = pd.read_csv("/content/train.csv")
 print(data.head())
+```
+
 
 
 ## 3. Distance Calculation
