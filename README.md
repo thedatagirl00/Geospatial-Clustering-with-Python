@@ -34,6 +34,8 @@ print(data.head())
 ## 3. Distance Calculation
 To understand the actual travel required for deliveries, the real-world distance (in kilometers) between each restaurant and its corresponding delivery location is calculated using the `geodesic` formula from the `geopy` library. This provides a more accurate measure than Euclidean distance, accounting for the curvature of the Earth.
 
+
+```python
 ...def calculate_distance(row):
     return geodesic(
         (row['Restaurant_latitude'], row['Restaurant_longitude']),
@@ -42,11 +44,12 @@ To understand the actual travel required for deliveries, the real-world distance
 
 data['Distance_km'] = data.apply(calculate_distance, axis=1)
 print(data[['Restaurant_latitude', 'Restaurant_longitude', 'Delivery_location_latitude', 'Delivery_location_longitude', 'Distance_km']].head())
+...
 
 ## 4. Interactive Visualization of Delivery Locations
 All delivery locations across India are visualized on an interactive map using Plotly. This initial visualization helps to understand the geographical distribution of delivery activities and identify areas of high concentration or sparsity.
 
-
+```python
 import plotly.graph_objects as go
 
 fig = go.Figure()
@@ -77,12 +80,14 @@ fig.update_layout(
 )
 
 fig.show()
+...
 
 The visualization reveals that delivery activity is predominantly concentrated in the southern and central regions of India, with fewer points in the northern and northeastern zones. This insight can inform strategic service expansion or resource allocation decisions.
 
 ## 5. K-Means Clustering
 K-Means clustering is applied to the delivery location coordinates to group them into a predefined number of clusters (`k=3` in this case). The clusters and their centroids are then visualized on a map, allowing for an immediate understanding of the identified geographical groupings.
 
+```python
 X = data[['Delivery_location_latitude', 'Delivery_location_longitude']]
 k = 3
 kmeans = KMeans(n_clusters=k, random_state=42, n_init=10) # Added n_init to suppress warning
@@ -128,11 +133,12 @@ fig.update_layout(
 )
 
 fig.show()
+...
 
 ## 6. Outlier Removal and Zone Optimization
 Upon inspecting the clustered results, it was observed that one of the clusters (Cluster 1) contained geographical points outside the expected Indian boundaries, indicating potential data entry errors or GPS inaccuracies. This outlier cluster is removed, and the remaining valid clusters are relabeled with business-contextual names like "Central Delivery Zone" and "Southern Delivery Zone" to make them more actionable for logistics planning.
 
-
+```python
 filtered_data = data[data['Cluster'] != 1]
 filtered_centroids = centroids[[0, 2]]  # Keep only Cluster 0 and 2
 
@@ -143,6 +149,7 @@ cluster_labels = {
 filtered_data['Optimized_Zone'] = filtered_data['Cluster'].map(cluster_labels)
 
 print(filtered_data['Optimized_Zone'].value_counts())
+...
 
 ## 7. Conclusion
 This project successfully demonstrates how geospatial clustering can be used to segment delivery locations into meaningful zones. By identifying and removing outliers, and then assigning intuitive names to the clusters, the raw spatial data is transformed into actionable intelligence for improved logistics planning, such as optimizing delivery routes, allocating resources efficiently, and identifying strategic areas for business expansion. This approach provides a solid foundation for more advanced location-based decision-making.
